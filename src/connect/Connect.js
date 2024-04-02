@@ -22,10 +22,10 @@ class Connect {
     }
   }
 
-  async get(path) {
+  async get(path, params) {
     try {
       const url = `${this.#baseUrlApi}${path}`;
-      const response = await axios.get(url, this.#config); // Usa la configuración común
+      const response = await axios.get(url, { ...this.#config, params }); // Agrega los params aquí
       return response.data;
     } catch (error) {
       console.error("Error en la solicitud GET:", error);

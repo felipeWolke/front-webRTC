@@ -1,73 +1,73 @@
 import React, { useMemo, useState } from 'react';
-import Connect from '../connect/Connect'; // Asegúrate de que la ruta sea correcta
+import Connect from '../connect/Connect';
 
 function Joystick({ numberCamera }) {
     const connect = useMemo(() => new Connect(), []);
-    const [isDisabled, setIsDisabled] = useState(false); // Estado para controlar la deshabilitación de los botones
+    const [isDisabled, setIsDisabled] = useState(false);
 
-    const handleMove = async (direction) => {
-        setIsDisabled(true); // Deshabilita los botones al hacer clic
+    const handleMove = async (x, y, zoom) => {
+        setIsDisabled(true);
 
         try {
-            const path = `/camera/${numberCamera}`;
-            const data = { direction };
-            const response = await connect.post(path, data);
-            console.log('Respuesta de la API:', response.data);
+            const path = `/move`; // Asume que tu API tiene un endpoint /move
+            const queryParams = { x, y, zoom, camera: numberCamera }; // Ejemplo de cómo podrías pasar el número de cámara y los parámetros de movimiento
+            console.log('Sending move command to camera');
+            const response = await connect.get(path, queryParams);
+            console.log('Respuesta de la API:', response);
         } catch (error) {
             console.error('Error al mover la cámara:', error);
         } finally {
             setTimeout(() => {
-                setIsDisabled(false); // Habilita los botones después de 3 segundos
+                setIsDisabled(false);
             }, 3000);
         }
     };
 
     return (
         <div className="flex flex-wrap justify-center items-center space-x-4 space-y-4">
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('up')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Arriba
-    </button>
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('down')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Abajo
-    </button>
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('left')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Izquierda
-    </button>
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('right')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Derecha
-    </button>
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('zoomIn')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Zoom In
-    </button>
-    <button
-        disabled={isDisabled}
-        onClick={() => handleMove('zoomOut')}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400 h-full"
-    >
-        Zoom Out
-    </button>
-</div>
-
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(0, -0.08, 0)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Arriba
+            </button>
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(0, 0.08, 0)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Abajo
+            </button>
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(-0.08, 0, 0)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Izquierda
+            </button>
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(0.08, 0, 0)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Derecha
+            </button>
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(0, 0, 0.05)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Zoom In
+            </button>
+            <button
+                disabled={isDisabled}
+                onClick={() => handleMove(0, 0, -0.05)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+            >
+                Zoom Out
+            </button>
+        </div>
     );
 }
 

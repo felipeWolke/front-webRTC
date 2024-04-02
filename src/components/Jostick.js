@@ -9,8 +9,8 @@ function Joystick({ numberCamera }) {
         setIsDisabled(true);
 
         try {
-            const path = `/move`; // Asume que tu API tiene un endpoint /move
-            const queryParams = { x, y, zoom, camera: numberCamera }; // Ejemplo de cómo podrías pasar el número de cámara y los parámetros de movimiento
+            const path = `/move`;
+            const queryParams = { x, y, zoom, camera: numberCamera };
             console.log('Sending move command to camera');
             const response = await connect.get(path, queryParams);
             console.log('Respuesta de la API:', response);
@@ -24,7 +24,7 @@ function Joystick({ numberCamera }) {
     };
 
     return (
-        <div className="flex flex-wrap justify-center items-center space-x-4 space-y-4">
+        <div className="flex flex-col items-center justify-center space-y-2">
             <button
                 disabled={isDisabled}
                 onClick={() => handleMove(0, -0.08, 0)}
@@ -32,6 +32,22 @@ function Joystick({ numberCamera }) {
             >
                 Arriba
             </button>
+            <div className="flex space-x-10">  {/* Aumento del espacio entre botones */}
+                <button
+                    disabled={isDisabled}
+                    onClick={() => handleMove(-0.08, 0, 0)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                >
+                    Izquierda
+                </button>
+                <button
+                    disabled={isDisabled}
+                    onClick={() => handleMove(0.08, 0, 0)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                >
+                    Derecha
+                </button>
+            </div>
             <button
                 disabled={isDisabled}
                 onClick={() => handleMove(0, 0.08, 0)}
@@ -39,34 +55,22 @@ function Joystick({ numberCamera }) {
             >
                 Abajo
             </button>
-            <button
-                disabled={isDisabled}
-                onClick={() => handleMove(-0.08, 0, 0)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
-            >
-                Izquierda
-            </button>
-            <button
-                disabled={isDisabled}
-                onClick={() => handleMove(0.08, 0, 0)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
-            >
-                Derecha
-            </button>
-            <button
-                disabled={isDisabled}
-                onClick={() => handleMove(0, 0, 0.05)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
-            >
-                Zoom In
-            </button>
-            <button
-                disabled={isDisabled}
-                onClick={() => handleMove(0, 0, -0.05)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
-            >
-                Zoom Out
-            </button>
+            <div className="flex space-x-4 mt-4">  {/* Zoom In y Zoom Out al lado del otro */}
+                <button
+                    disabled={isDisabled}
+                    onClick={() => handleMove(0, 0, 0.05)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                >
+                    Zoom In
+                </button>
+                <button
+                    disabled={isDisabled}
+                    onClick={() => handleMove(0, 0, -0.05)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                >
+                    Zoom Out
+                </button>
+            </div>
         </div>
     );
 }

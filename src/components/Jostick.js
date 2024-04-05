@@ -27,7 +27,7 @@ function Joystick({ numberCamera }) {
         <div className="flex flex-col items-center justify-center space-y-2">
             <button
                 disabled={isDisabled}
-                onClick={() => handleMove(0, -0.08, 0)}
+                onClick={() => handleMove(0, -0.2, 0)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
             >
                 Arriba
@@ -35,14 +35,14 @@ function Joystick({ numberCamera }) {
             <div className="flex space-x-10">  {/* Aumento del espacio entre botones */}
                 <button
                     disabled={isDisabled}
-                    onClick={() => handleMove(-0.08, 0, 0)}
+                    onClick={() => handleMove(-0.2, 0, 0)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
                     Izquierda
                 </button>
                 <button
                     disabled={isDisabled}
-                    onClick={() => handleMove(0.08, 0, 0)}
+                    onClick={() => handleMove(0.2, 0, 0)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
                     Derecha
@@ -50,7 +50,7 @@ function Joystick({ numberCamera }) {
             </div>
             <button
                 disabled={isDisabled}
-                onClick={() => handleMove(0, 0.08, 0)}
+                onClick={() => handleMove(0, 0.2, 0)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
             >
                 Abajo
@@ -58,14 +58,14 @@ function Joystick({ numberCamera }) {
             <div className="flex space-x-4 mt-4">  {/* Zoom In y Zoom Out al lado del otro */}
                 <button
                     disabled={isDisabled}
-                    onClick={() => handleMove(0, 0, 0.05)}
+                    onClick={() => handleMove(0, 0, 0.1)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
                     Zoom In
                 </button>
                 <button
                     disabled={isDisabled}
-                    onClick={() => handleMove(0, 0, -0.05)}
+                    onClick={() => handleMove(0, 0, -0.1)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
                     Zoom Out

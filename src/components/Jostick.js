@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faSearchPlus, faSearchMinus } from '@fortawesome/free-solid-svg-icons';
 import Connect from '../connect/Connect';
 
 function Joystick({ numberCamera }) {
@@ -30,22 +32,22 @@ function Joystick({ numberCamera }) {
                 onClick={() => handleMove(0, -0.2, 0)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
             >
-                Arriba
+                <FontAwesomeIcon icon={faArrowUp} />
             </button>
-            <div className="flex space-x-10">  {/* Aumento del espacio entre botones */}
+            <div className="flex space-x-10">
                 <button
                     disabled={isDisabled}
                     onClick={() => handleMove(-0.2, 0, 0)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
-                    Izquierda
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
                 <button
                     disabled={isDisabled}
                     onClick={() => handleMove(0.2, 0, 0)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
-                    Derecha
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </button>
             </div>
             <button
@@ -53,22 +55,22 @@ function Joystick({ numberCamera }) {
                 onClick={() => handleMove(0, 0.2, 0)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
             >
-                Abajo
+                <FontAwesomeIcon icon={faArrowDown} />
             </button>
-            <div className="flex space-x-4 mt-4">  {/* Zoom In y Zoom Out al lado del otro */}
+            <div className="flex space-x-4 mt-4">
                 <button
                     disabled={isDisabled}
                     onClick={() => handleMove(0, 0, 0.1)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
-                    Zoom In
+                    <FontAwesomeIcon icon={faSearchPlus} />
                 </button>
                 <button
                     disabled={isDisabled}
                     onClick={() => handleMove(0, 0, -0.1)}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                 >
-                    Zoom Out
+                    <FontAwesomeIcon icon={faSearchMinus} />
                 </button>
             </div>
         </div>

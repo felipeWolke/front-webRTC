@@ -8,32 +8,19 @@ function VideoPlayer({ src }) {
         let hls;
 
         if (Hls.isSupported()) {
-            hls = new Hls({
-                startLevel: -1,
-                capLevelToPlayerSize: true,
-                liveSyncDurationCount: 1,
-                maxMaxBufferLength: 30,
-            });
-
+            hls = new Hls();
             hls.loadSource(src);
             hls.attachMedia(videoRef.current);
 
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                videoRef.current.play();
-            });
+            // No hay necesidad de llamar a play() aquí; dejamos que el usuario inicie la reproducción mediante el control del video
 
             hls.on(Hls.Events.LEVEL_LOADED, function(event, data) {
                 if (data.details.live) {
-                    // Busca al "borde en vivo" del stream
-                    const liveSyncPosition = hls.latencyController?.computeLivePosition(data.details.totalduration, data.details);
-                    videoRef.current.currentTime = liveSyncPosition - data.details.targetduration;
+                    // Este evento se puede utilizar para manipular la posición de reproducción si es necesario
                 }
             });
         } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = src;
-            videoRef.current.addEventListener('loadedmetadata', () => {
-                videoRef.current.currentTime = videoRef.current.duration;
-            });
         }
 
         return () => {

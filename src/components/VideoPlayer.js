@@ -8,17 +8,15 @@ function VideoPlayer({ src }) {
         let hls;
 
         if (Hls.isSupported()) {
-            hls = new Hls();
+            hls = new Hls({
+                startLevel: -1, // permite que hls.js decida el nivel inicial automáticamente
+                capLevelToPlayerSize: true // limita la calidad del video al tamaño del reproductor
+            });
+
             hls.loadSource(src);
             hls.attachMedia(videoRef.current);
-            // Quitar el play automático para respetar la política de interacción del usuario
-            // hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            //     videoRef.current.play();
-            // });
         } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = src;
-            // Quitar el play automático para respetar la política de interacción del usuario
-            // videoRef.current.play();
         }
 
         return () => {
@@ -32,7 +30,7 @@ function VideoPlayer({ src }) {
         <video
             ref={videoRef}
             controls
-            className="w-full aspect-video"  // El video mantiene su aspecto y ocupa el ancho completo del contenedor
+            className="w-full aspect-video" // El video mantiene su aspecto y ocupa el ancho completo del contenedor
         />
     );
 }

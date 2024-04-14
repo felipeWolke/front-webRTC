@@ -11,7 +11,7 @@ function Home3 (){
                 <div >
                     <VideoPlayer className="bg-white rounded-lg shadow-md overflow-hidden" src={`${cameraRoute}/hlsDataRut956_3/stream.m3u8`} />
                     <div className=" mt-12 bg-gray-100">
-                    <Joystick numberCamera={2}></Joystick>
+                    <Joystick numberCamera={3}></Joystick>
                     </div>
                 </div>
             </div>

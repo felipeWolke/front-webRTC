@@ -14,7 +14,7 @@ function Joystick({ numberCamera }) {
             const path = `/move`;
             const queryParams = { x, y, zoom, camId: numberCamera }; // Asegúrate de que esto coincida con el servidor
             console.log('Sending move command to camera');
-            const response = await connect.post(path, queryParams); // Cambiado a POST si es necesario
+            const response = await connect.get(path, queryParams); // Cambiado a POST si es necesario
             console.log('API Response:', response);
         } catch (error) {
             console.error('Error moving camera:', error);

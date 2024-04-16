@@ -20,12 +20,12 @@ function VideoPlayer({ src }) {
 
         const checkDelay = () => {
             if (videoRef.current && videoRef.current.buffered.length > 0) {
-                const endOfBuffer = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
+                
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
                 console.log('livePosition', livePosition)
-                console.log('endOfBuffer', endOfBuffer)
+                console.log('currentTime', videoRef.current.currentTime)
                 console.log('delay', delay)
                 setShowLogo(false)
                 setDelayed(delay > 10);

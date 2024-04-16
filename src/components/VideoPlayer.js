@@ -24,9 +24,7 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
-                console.log('livePosition', livePosition)
-                console.log('currentTime', videoRef.current.currentTime)
-                console.log('delay', delay)
+                
                 setShowLogo(false)
                 setDelayed(delay > 10);
 

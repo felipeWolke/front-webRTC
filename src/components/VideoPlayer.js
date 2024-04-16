@@ -38,12 +38,7 @@ function VideoPlayer({ src }) {
                     setShowPopup(false);
                 }
 
-                // Controla la visibilidad del logo si el buffer no avanza
-                if (delay > 0.5) { // Ajusta este valor según necesites para determinar "no avanza"
-                    setShowLogo(true);
-                } else {
-                    setShowLogo(false);
-                }
+                
             }
             else{
                 setShowLogo(true)

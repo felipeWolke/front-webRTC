@@ -8,26 +8,29 @@ function VideoPlayer({ src }) {
     const hls = useRef(null);
 
     useEffect(() => {
+        const video = videoRef.current;
         if (Hls.isSupported()) {
             hls.current = new Hls();
             hls.current.loadSource(src);
-            hls.current.attachMedia(videoRef.current);
+            hls.current.attachMedia(video);
             hls.current.on(Hls.Events.MANIFEST_PARSED, () => {
                 setIsPlaying(true);
             });
-        } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-            videoRef.current.src = src;
+        } else if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = src;
             setIsPlaying(true);
         }
 
-        videoRef.current.onerror = () => {
-            setIsPlaying(false); // Cambia a false si hay un error de carga
-        };
+        if (video) {
+            video.onerror = () => {
+                setIsPlaying(false); // Cambia a false si hay un error de carga
+            };
+        }
 
         const checkDelay = () => {
-            if (videoRef.current && videoRef.current.buffered.length > 0) {
-                const endOfBuffer = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
-                const livePosition = videoRef.current.duration;
+            if (video && video.buffered.length > 0) {
+                const endOfBuffer = video.buffered.end(video.buffered.length - 1);
+                const livePosition = video.duration;
                 const delay = livePosition - endOfBuffer;
                 setDelayed(delay > 10);
             }
@@ -40,6 +43,9 @@ function VideoPlayer({ src }) {
                 hls.current.destroy();
             }
             clearInterval(interval);
+            if (video) {
+                video.onerror = null;
+            }
         };
     }, [src]);
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
+import logo from './logo.png';  // Asegúrate de que la ruta es correcta
 
 function VideoPlayer({ src }) {
     const videoRef = useRef(null);
     const [isDelayed, setDelayed] = useState(false);
     const [showPopup, setShowPopup] = useState(false); // Estado para controlar el pop-up
+    const [showLogo, setShowLogo] = useState(false); // Estado para mostrar el logo
     const hls = useRef(null);
 
     useEffect(() => {
@@ -21,17 +23,30 @@ function VideoPlayer({ src }) {
                 const endOfBuffer = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
                 const livePosition = videoRef.current.duration;
                 const delay = livePosition - endOfBuffer;
+                console.log('livePosition', livePosition)
+                console.log('endOfBuffer', endOfBuffer)
+                console.log('delay', delay)
+                setShowLogo(false)
                 setDelayed(delay > 10);
-                
-                // Muestra un pop-up si el retraso es mayor de 5 segundos
+
                 if (delay > 5) {
-                    if (!showPopup) { // Esto evita que el pop-up se muestre continuamente
+                    if (!showPopup) {
                         alert("El video está retrasado más de 5 segundos.");
-                        setShowPopup(true); // Activa el estado para que el pop-up no se repita
+                        setShowPopup(true);
                     }
                 } else {
-                    setShowPopup(false); // Restablece el estado si el retraso es menor de 5 segundos
+                    setShowPopup(false);
                 }
+
+                // Controla la visibilidad del logo si el buffer no avanza
+                if (delay > 0.5) { // Ajusta este valor según necesites para determinar "no avanza"
+                    setShowLogo(true);
+                } else {
+                    setShowLogo(false);
+                }
+            }
+            else{
+                setShowLogo(true)
             }
         };
 
@@ -43,7 +58,7 @@ function VideoPlayer({ src }) {
             }
             clearInterval(interval);
         };
-    }, [src, showPopup]); // Añade showPopup a la lista de dependencias
+    }, [src, showPopup]);
 
     const handleLiveSeek = () => {
         const video = videoRef.current;
@@ -57,6 +72,11 @@ function VideoPlayer({ src }) {
     return (
         <div className="relative w-full">
             <video ref={videoRef} controls className="w-full aspect-video" />
+            {showLogo && (
+                <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                    <img src={logo} alt="Loading..." />
+                </div>
+            )}
             <button
                 onClick={handleLiveSeek}
                 className={`absolute top-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer ${isDelayed ? 'bg-transparent text-red-500' : 'bg-red-500 text-white'}`}

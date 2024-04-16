@@ -42,10 +42,10 @@ function Joystick({ numberCamera }) {
                 <FontAwesomeIcon icon={faArrowDown} />
             </button>
             <div className="flex space-x-4 mt-4">
-                <button disabled={isDisabled} onClick={() => handleMove(0, 0, 0.1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button disabled={isDisabled} onClick={() => handleMove(0, 0, 0.5)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faSearchPlus} />
                 </button>
-                <button disabled={isDisabled} onClick={() => handleMove(0, 0, -0.1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button disabled={isDisabled} onClick={() => handleMove(0, 0, -0.5)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faSearchMinus} />
                 </button>
             </div>

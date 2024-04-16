@@ -22,16 +22,17 @@ function VideoPlayer({ src }) {
             if (videoRef.current && videoRef.current.buffered.length > 0) {
                 const endOfBuffer = videoRef.current.buffered.end(videoRef.current.buffered.length - 1);
                 const livePosition = videoRef.current.duration;
-                const delay = livePosition - endOfBuffer;
+                let delay = livePosition - videoRef.current.currentTime;
+
                 console.log('livePosition', livePosition)
                 console.log('endOfBuffer', endOfBuffer)
                 console.log('delay', delay)
                 setShowLogo(false)
                 setDelayed(delay > 10);
 
-                if (delay > 5) {
+                if (delay > 15) {
                     if (!showPopup) {
-                        alert("El video está retrasado más de 5 segundos.");
+                        alert("El video está retrasado más de 15 segundos.");
                         setShowPopup(true);
                     }
                 } else {

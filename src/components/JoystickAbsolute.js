@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faSearchPlus, faSearchMinus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faArrowLeft, faArrowRight, faSearchPlus, faSearchMinus, faDotCircle } from '@fortawesome/free-solid-svg-icons';
 import Connect from '../connect/Connect';
 
 function JoystickAbsolute({ numberCamera }) {
@@ -12,9 +12,9 @@ function JoystickAbsolute({ numberCamera }) {
 
         try {
             const path = `/moveAbsolute`;
-            const queryParams = { x, y, zoom, camId: numberCamera }; // Asegúrate de que esto coincida con el servidor
+            const queryParams = { x, y, zoom, camId: numberCamera };
             console.log('Sending move command to camera');
-            const response = await connect.get(path, queryParams); // Cambiado a POST si es necesario
+            const response = await connect.get(path, queryParams);
             console.log('API Response:', response);
         } catch (error) {
             console.error('Error moving camera:', error);
@@ -31,10 +31,13 @@ function JoystickAbsolute({ numberCamera }) {
                 <FontAwesomeIcon icon={faArrowUp} />
             </button>
             <div className="flex space-x-10">
-                <button disabled={isDisabled} onClick={() => handleMove(-1, 0, 0)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button disabled={isDisabled} onClick={() => handleMove(-0.5, 0, 0)} className="bg-blue-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
-                <button disabled={isDisabled} onClick={() => handleMove(1, 0, 0)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400" disabled={isDisabled} onClick={() => handleMove(0, 0, 0.5)}>
+                    <FontAwesomeIcon icon={faDotCircle} />
+                </button>
+                <button disabled={isDisabled} onClick={() => handleMove(0.5, 0, 0)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faArrowRight} />
                 </button>
             </div>
@@ -42,10 +45,10 @@ function JoystickAbsolute({ numberCamera }) {
                 <FontAwesomeIcon icon={faArrowDown} />
             </button>
             <div className="flex space-x-4 mt-4">
-                <button disabled={isDisabled} onClick={() => handleMove(0, 0, 0.5)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button disabled={isDisabled} onClick={() => handleMove(0, 0, 1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faSearchPlus} />
                 </button>
-                <button disabled={isDisabled} onClick={() => handleMove(0, 0, -0.5)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                <button disabled={isDisabled} onClick={() => handleMove(0, 0, -1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faSearchMinus} />
                 </button>
             </div>

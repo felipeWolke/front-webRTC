@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
+import logo from './logo.png'
 
 function VideoPlayer({ src }) {
     const videoRef = useRef(null);
     const [isDelayed, setDelayed] = useState(false);
-    const [showPopup, setShowPopup] = useState(false); // Estado para controlar el pop-up
+    const [showPopup, setShowPopup] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false); // Estado para controlar si el video se está reproduciendo
     const hls = useRef(null);
 
     useEffect(() => {
@@ -12,8 +14,12 @@ function VideoPlayer({ src }) {
             hls.current = new Hls();
             hls.current.loadSource(src);
             hls.current.attachMedia(videoRef.current);
+            hls.current.on(Hls.Events.MANIFEST_PARSED, function() {
+                setIsPlaying(true);
+            });
         } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
             videoRef.current.src = src;
+            videoRef.current.oncanplay = () => setIsPlaying(true);
         }
 
         const checkDelay = () => {
@@ -22,20 +28,19 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 const delay = livePosition - endOfBuffer;
                 setDelayed(delay > 10);
-                
-                // Muestra un pop-up si el retraso es mayor de 5 segundos
+
                 if (delay > 5) {
-                    if (!showPopup) { // Esto evita que el pop-up se muestre continuamente
+                    if (!showPopup) {
                         alert("El video está retrasado más de 5 segundos.");
-                        setShowPopup(true); // Activa el estado para que el pop-up no se repita
+                        setShowPopup(true);
                     }
                 } else {
-                    setShowPopup(false); // Restablece el estado si el retraso es menor de 5 segundos
+                    setShowPopup(false);
                 }
             }
         };
 
-        const interval = setInterval(checkDelay, 1000); // Verifica cada segundo
+        const interval = setInterval(checkDelay, 1000);
 
         return () => {
             if (hls.current) {
@@ -43,7 +48,7 @@ function VideoPlayer({ src }) {
             }
             clearInterval(interval);
         };
-    }, [src, showPopup]); // Añade showPopup a la lista de dependencias
+    }, [src, showPopup]);
 
     const handleLiveSeek = () => {
         const video = videoRef.current;
@@ -56,7 +61,11 @@ function VideoPlayer({ src }) {
 
     return (
         <div className="relative w-full">
-            <video ref={videoRef} controls className="w-full aspect-video" />
+            {isPlaying ? (
+                <video ref={videoRef} controls className="w-full aspect-video" />
+            ) : (
+                <img src={logo} alt="No transmission" className="w-full aspect-video" />
+            )}
             <button
                 onClick={handleLiveSeek}
                 className={`absolute top-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer ${isDelayed ? 'bg-transparent text-red-500' : 'bg-red-500 text-white'}`}

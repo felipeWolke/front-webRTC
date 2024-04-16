@@ -34,7 +34,7 @@ function JoystickAbsolute({ numberCamera }) {
                 <button disabled={isDisabled} onClick={() => handleMove(-0.5, 0, 0)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400" disabled={isDisabled} onClick={() => handleMove(0, 0, 0.5)}>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400" disabled={isDisabled} onClick={() => handleMove(0, 0, 0)}>
                     <FontAwesomeIcon icon={faDotCircle} />
                 </button>
                 <button disabled={isDisabled} onClick={() => handleMove(0.5, 0, 0)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">

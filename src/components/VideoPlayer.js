@@ -24,13 +24,17 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
+                if(livePosition<16){
+                    setShowLogo(true)
+                }else{
+                    setShowLogo(false)
+                }
                 
-                setShowLogo(false)
                 setDelayed(delay > 10);
 
-                if (delay > 15) {
+                if (delay > 30) {
                     if (!showPopup) {
-                        alert("El video está retrasado más de 15 segundos.");
+                        alert("El video está retrasado más de 30 segundos.");
                         setShowPopup(true);
                     }
                 } else {

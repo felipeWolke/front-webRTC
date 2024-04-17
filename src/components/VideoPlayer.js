@@ -24,13 +24,13 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
-                if(livePosition<16){
+                if(livePosition<10){
                     setShowLogo(true)
                 }else{
                     setShowLogo(false)
                 }
                 
-                setDelayed(delay > 10);
+                setDelayed(delay > 15);
 
                 if (delay > 30) {
                     if (!showPopup) {

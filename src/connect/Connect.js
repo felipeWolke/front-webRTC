@@ -3,7 +3,6 @@ import axios from "axios";
 class Connect {
   #baseUrlApi = process.env.REACT_APP_API; // Asegúrate de que el nombre de la variable coincida con el que se usa en el código
   #config; // Declaración del campo privado
-
   constructor() {
     // Configuración común para las solicitudes
     this.#config = {
@@ -28,6 +27,7 @@ class Connect {
 
   async get(path, params) {
     try {
+      console.log(process.env.REACT_APP_AUTH_TOKEN)
       const url = `${this.#baseUrlApi}${path}`;
       const response = await axios.get(url, { ...this.#config, params }); // Agrega los params aquí
       return response.data;

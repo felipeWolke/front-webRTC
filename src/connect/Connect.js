@@ -27,7 +27,7 @@ class Connect {
 
   async get(path, params) {
     try {
-      console.log(process.env.REACT_APP_AUTH_TOKEN)
+      
       const url = `${this.#baseUrlApi}${path}`;
       const response = await axios.get(url, { ...this.#config, params }); // Agrega los params aquí
       return response.data;

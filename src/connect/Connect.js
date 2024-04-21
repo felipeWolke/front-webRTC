@@ -2,14 +2,18 @@ import axios from "axios";
 
 class Connect {
   #baseUrlApi = process.env.REACT_APP_API; // Asegúrate de que el nombre de la variable coincida con el que se usa en el código
+  #config; // Declaración del campo privado
 
-  // Configuración común para las solicitudes
-  #config = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  };
+  constructor() {
+    // Configuración común para las solicitudes
+    this.#config = {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}` // Añade el token de autorización aquí
+      },
+    };
+  }
 
   async post(path, data) {
     try {

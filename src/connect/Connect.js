@@ -10,7 +10,7 @@ class Connect {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}` // Añade el token de autorización aquí
+        Authorization: `${process.env.REACT_APP_AUTH_TOKEN}` // Añade el token de autorización aquí
       },
     };
   }

@@ -24,10 +24,10 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
-                if(livePosition<5){
-                    setShowLogo(true)
-                }else{
-                    setShowLogo(false)
+                if(livePosition < 5){
+                    setShowLogo(true);
+                } else {
+                    setShowLogo(false);
                 }
                 
                 setDelayed(delay > 4);
@@ -40,11 +40,8 @@ function VideoPlayer({ src }) {
                 } else {
                     setShowPopup(false);
                 }
-
-                
-            }
-            else{
-                setShowLogo(true)
+            } else {
+                setShowLogo(true);
             }
         };
 
@@ -69,7 +66,7 @@ function VideoPlayer({ src }) {
 
     return (
         <div className="relative w-full">
-            <video ref={videoRef} controls className="w-full aspect-video" />
+            <video ref={videoRef} controls className="w-full aspect-video" autoPlay muted />
             {showLogo && (
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
                     <img src={logo} alt="Loading..." />

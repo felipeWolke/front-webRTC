@@ -9,12 +9,12 @@ function JoystickAbsolute({ numberCamera }) {
 
     const handleMove = async (x, y, zoom) => {
         setIsDisabled(true);
-
+    
         try {
             const path = `/moveAbsolute`;
-            const queryParams = { x, y, zoom, camId: numberCamera };
+            const body = { x, y, zoom, camId: numberCamera };  // Datos enviados en el cuerpo de la solicitud
             console.log('Sending move command to camera');
-            const response = await connect.get(path, queryParams);
+            const response = await connect.post(path, body);  // Usando el método post de Connect
             console.log('API Response:', response);
         } catch (error) {
             console.error('Error moving camera:', error);
@@ -24,6 +24,7 @@ function JoystickAbsolute({ numberCamera }) {
             }, 3000);
         }
     };
+    
 
     return (
         <div className="flex flex-col items-center justify-center space-y-2">

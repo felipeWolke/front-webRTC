@@ -41,7 +41,6 @@ function VideoPlayer({ src }) {
                     setShowPopup(false);
                 }
 
-                // Aquí es donde ajustamos automáticamente al livePosition si el delay es mayor a 3 segundos
                 if (delay > 3) {
                     videoRef.current.currentTime = livePosition;
                 }
@@ -72,7 +71,7 @@ function VideoPlayer({ src }) {
 
     return (
         <div className="relative w-full">
-            <video ref={videoRef} controls className="w-full aspect-video" autoPlay muted />
+            <video ref={videoRef} className="w-full aspect-video" autoPlay muted />
             {showLogo && (
                 <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
                     <img src={logo} alt="Loading..." />

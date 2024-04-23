@@ -42,7 +42,7 @@ function VideoPlayer({ src }) {
                 }
 
                 // Aquí es donde ajustamos automáticamente al livePosition si el delay es mayor a 3 segundos
-                if (delay > 2) {
+                if (delay > 3) {
                     videoRef.current.currentTime = livePosition;
                 }
                 

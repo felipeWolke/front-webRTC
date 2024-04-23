@@ -24,17 +24,17 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 let delay = livePosition - videoRef.current.currentTime;
 
-                if(livePosition<10){
+                if(livePosition<5){
                     setShowLogo(true)
                 }else{
                     setShowLogo(false)
                 }
                 
-                setDelayed(delay > 15);
+                setDelayed(delay > 4);
 
-                if (delay > 30) {
+                if (delay > 15) {
                     if (!showPopup) {
-                        alert("El video está retrasado más de 30 segundos.");
+                        alert("El video está retrasado más de 15 segundos.");
                         setShowPopup(true);
                     }
                 } else {
@@ -77,7 +77,7 @@ function VideoPlayer({ src }) {
             )}
             <button
                 onClick={handleLiveSeek}
-                className={`absolute top-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer ${isDelayed ? 'bg-transparent text-red-500' : 'bg-red-500 text-white'}`}
+                className={`absolute top-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer ${isDelayed ? 'bg-red-500 text-white' : 'bg-transparent text-red-500'}`}
                 title="Go to live"
             >
                 LIVE

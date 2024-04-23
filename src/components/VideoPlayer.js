@@ -69,6 +69,16 @@ function VideoPlayer({ src }) {
         }
     };
 
+    const handleFullScreen = () => {
+        if (videoRef.current.requestFullscreen) {
+            videoRef.current.requestFullscreen();
+        } else if (videoRef.current.webkitRequestFullscreen) { /* Safari */
+            videoRef.current.webkitRequestFullscreen();
+        } else if (videoRef.current.msRequestFullscreen) { /* IE11 */
+            videoRef.current.msRequestFullscreen();
+        }
+    };
+
     return (
         <div className="relative w-full">
             <video ref={videoRef} className="w-full aspect-video" autoPlay muted />
@@ -83,6 +93,13 @@ function VideoPlayer({ src }) {
                 title="Go to live"
             >
                 LIVE
+            </button>
+            <button
+                onClick={handleFullScreen}
+                className="absolute bottom-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold cursor-pointer bg-blue-500 text-white"
+                title="Full screen"
+            >
+                ⛶
             </button>
         </div>
     );

@@ -22,16 +22,16 @@ function VideoPlayer({ src }) {
             if (videoRef.current && videoRef.current.buffered.length > 0) {
                 
                 const livePosition = videoRef.current.duration;
-                let delay = livePosition - videoRef.current.currentTime;
+                const delay = livePosition - videoRef.current.currentTime;
 
-                if(livePosition < 5){
+                if (livePosition < 5) {
                     setShowLogo(true);
                 } else {
                     setShowLogo(false);
                 }
-                
-                setDelayed(delay > 4);
 
+                setDelayed(delay > 4);
+                
                 if (delay > 15) {
                     if (!showPopup) {
                         alert("El video está retrasado más de 15 segundos.");
@@ -40,6 +40,12 @@ function VideoPlayer({ src }) {
                 } else {
                     setShowPopup(false);
                 }
+
+                // Aquí es donde ajustamos automáticamente al livePosition si el delay es mayor a 3 segundos
+                if (delay > 3) {
+                    videoRef.current.currentTime = livePosition;
+                }
+                
             } else {
                 setShowLogo(true);
             }

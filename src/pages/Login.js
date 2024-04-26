@@ -8,16 +8,23 @@ function Login() {
 
     const handleLogin = async (e, cameraRoute) => {
         e.preventDefault();
-
-        const storedUsername = process.env.REACT_APP_USERNAME;
-        const storedPassword = process.env.REACT_APP_PASSWORD;
-
-        if (username === storedUsername && password === storedPassword) {
+    
+        const credentials = { username, password };
+        const response = await fetch('https://cams.wolkelab.com/api/login', {  // Asegúrate de tener la URL correcta
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials)
+        });
+    
+        if (response.ok) {
+            const { accessToken } = await response.json();
+            localStorage.setItem('token', accessToken);
             navigate(cameraRoute);
         } else {
             alert('Las credenciales son incorrectas');
         }
     };
+    
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">

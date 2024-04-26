@@ -1,22 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Home from './pages/Home'; // Asume que tienes un componente Home
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 import Home2 from './pages/Home2';
 import Home3 from './pages/Home3';
+import Login from './pages/Login';
+import withAuth from './components/WithAuth';  // Importa el HOC
+import { Navigate } from 'react-router-dom';
 
 function App() {
+  // Aquí se utilizan componentes ya envueltos por el HOC
+  const AuthHome = withAuth(Home);
+  const AuthHome2 = withAuth(Home2);
+  const AuthHome3 = withAuth(Home3);
+
   return (
-    
     <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/home2" element={<Home2 />} />
-                <Route path="/home3" element={<Home3 />} />
-                <Route path="/" element={<Navigate replace to="/login" />} />
-            </Routes>
-        </Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<AuthHome />} />
+        <Route path="/home2" element={<AuthHome2 />} />
+        <Route path="/home3" element={<AuthHome3 />} />
+        <Route path="/" element={<Navigate replace to="/login" />} />
+      </Routes>
+    </Router>
   );
 }
 

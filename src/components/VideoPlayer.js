@@ -94,13 +94,7 @@ function VideoPlayer({ src }) {
             >
                 LIVE
             </button>
-            <button
-                onClick={handleFullScreen}
-                className="absolute bottom-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold cursor-pointer bg-blue-500 text-white"
-                title="Full screen"
-            >
-                ⛶
-            </button>
+            
         </div>
     );
 }

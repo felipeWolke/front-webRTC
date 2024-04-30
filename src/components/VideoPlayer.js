@@ -23,7 +23,7 @@ function VideoPlayer({ src }) {
                 const livePosition = videoRef.current.duration;
                 const delay = livePosition - videoRef.current.currentTime;
 
-                setShowLogo(livePosition < 5);
+                setShowLogo(livePosition < 8);
                 setDelayed(delay > 4);
 
                 if (delay > 15 && !showPopup) {

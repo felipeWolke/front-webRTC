@@ -54,15 +54,17 @@ function Login() {
                         />
                     </div>
                     <div className="flex flex-col space-y-4">
-                        <button type="button" onClick={(e) => handleLogin(e, '/home')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            WATC001-Cam
+                        <button type="button" onClick={(e) => handleLogin(e, '/secondary')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            WATC001-Cam-Secondary
                         </button>
-                        <button type="button" onClick={(e) => handleLogin(e, '/home2')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            WATC002-Cam
+                        <button type="button" onClick={(e) => handleLogin(e, '/secondary2')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            WATC002-Cam-Secondary
                         </button>
-                        <button type="button" onClick={(e) => handleLogin(e, '/home3')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            WATC003-Cam
+                        <button type="button" onClick={(e) => handleLogin(e, '/secondary3')} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            WATC003-Cam-Secondary
                         </button>
+
+
                     </div>
                 </form>
             </div>

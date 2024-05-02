@@ -5,12 +5,14 @@ import Home3 from './pages/Home3';
 import Login from './pages/Login';
 import withAuth from './components/WithAuth';  // Importa el HOC
 import { Navigate } from 'react-router-dom';
+import Secondary from './pages/Secondary';
 
 function App() {
   // Aquí se utilizan componentes ya envueltos por el HOC
   const AuthHome = withAuth(Home);
   const AuthHome2 = withAuth(Home2);
   const AuthHome3 = withAuth(Home3);
+  const AuthSecondary = withAuth(Secondary);
 
   return (
     <Router>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/home" element={<AuthHome />} />
         <Route path="/home2" element={<AuthHome2 />} />
         <Route path="/home3" element={<AuthHome3 />} />
+        <Route path="/secondary" element={<AuthSecondary />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
       </Routes>
     </Router>

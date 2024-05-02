@@ -59,13 +59,7 @@ function VideoPlayer({ src }) {
                     <img src={logo} alt="Loading..." className="max-w-full h-auto" />
                 </div>
             )}
-            <button
-                onClick={() => videoRef.current && (videoRef.current.currentTime = videoRef.current.duration)}
-                className={`absolute top-10 right-2 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold cursor-pointer ${isDelayed ? 'bg-red-500 text-white' : 'bg-transparent text-red-500'}`}
-                title="Go to live"
-            >
-                LIVE
-            </button>
+            
         </div>
     );
 }

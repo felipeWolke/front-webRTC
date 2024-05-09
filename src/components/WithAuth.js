@@ -6,7 +6,7 @@ function withAuth(Component) {
         const token = localStorage.getItem('token');
         if (!token) {
             // Si no hay token, redirigir al usuario a la página de login
-            return <Navigate to="/login" replace />;
+            return <Navigate to="/" replace />;
         }
 
         // Si hay token, renderizar el componente original con todas sus props

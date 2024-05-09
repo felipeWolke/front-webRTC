@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function Login() {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('wolke');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { cameraId } = useParams();  // Captura el identificador de cámara desde la URL
@@ -11,7 +11,7 @@ function Login() {
         e.preventDefault();
     
         const credentials = { username, password };
-        const response = await fetch(`https://cams.wolkelab.com/api/login/${cameraId}`, {  // Modifica la URL de la API según el cameraId
+        const response = await fetch(`https://cams.wolkelab.com/api/login`, {  // Modifica la URL de la API según el cameraId
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(credentials)
@@ -31,17 +31,7 @@ function Login() {
             <h1 className="text-xl mb-6">Control de Cámaras Wolke - Cámara {cameraId}</h1>
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
                 <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label htmlFor="userInput" className="block text-sm font-medium text-gray-700">Usuario</label>
-                        <input
-                            type="text"
-                            id="userInput"
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                            placeholder="usuario"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
+                    
                     <div className="mb-4">
                         <label htmlFor="passwordInput" className="block text-sm font-medium text-gray-700">Contraseña</label>
                         <input

@@ -7,7 +7,7 @@ function Home3 (){
 
     return (
         <div className='w-full min-h-screen flex items-center justify-center bg-white'>
-            <VideoPlayer src={`${cameraRoute}/hlsDataRut956_1/stream.m3u8`} />
+            <VideoPlayer src={`${cameraRoute}/hlsDataRut956_3/stream.m3u8`} />
         </div>
     );
 

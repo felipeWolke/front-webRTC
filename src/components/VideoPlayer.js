@@ -27,7 +27,9 @@ function VideoPlayer({ src }) {
                 setDelayed(delay > 4);
 
                 if (delay > 15 && !showPopup) {
-                    alert("El video está retrasado más de 15 segundos.");
+                    if (window.confirm("El video está retrasado más de 15 segundos. ¿Quieres recargar la página?")) {
+                        window.location.reload();
+                    }
                     setShowPopup(true);
                 } else {
                     setShowPopup(false);
@@ -59,7 +61,6 @@ function VideoPlayer({ src }) {
                     <img src={logo} alt="Loading..." className="max-w-full h-auto" />
                 </div>
             )}
-            
         </div>
     );
 }
